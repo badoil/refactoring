@@ -1,3 +1,5 @@
+// 조건문 분해하기
+
 function calculateCharge(date, quantity, plan) {
   let charge = 0;
   if (!date.isBefore(plan.summerStart) && !date.isAfter(plan.summerEnd))
