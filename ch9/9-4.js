@@ -23,7 +23,7 @@ class Person {
   }
 
   set officeAreaCode(value) {
-    this.#telephoneNumber.areaCode = value;
+    this.#telephoneNumber.areaCode = new TelephoneNumber(value, this.officeNumber); // TelephoneNumber의 값(areacode, number)이 변할때마다 참조값을 변경하는게 아니라 값 자체를 생성해버려서 불변성을 유지
   }
 
   get officeNumber() {
@@ -31,7 +31,7 @@ class Person {
   }
 
   set officeNumber(value) {
-    this.#telephoneNumber.number = value;
+    this.#telephoneNumber.number = new TelephoneNumber(this.officeAreaCode, value);  // TelephoneNumber의 값(areacode, number)이 변할때마다 참조값을 변경하는게 아니라 값 자체를 생성해버려서 불변성을 유지
   }
 }
 
@@ -46,16 +46,16 @@ class TelephoneNumber {
   get areaCode() {
     return this.#areaCode;
   }
-  set areaCode(arg) {
-    this.#areaCode = arg;
-  }
+  // set areaCode(arg) {          // 불변성 유지를 위해 세터를 없앰
+  //   this.#areaCode = arg;
+  // }
 
   get number() {
     return this.#number;
   }
-  set number(arg) {
-    this.#number = arg;
-  }
+  // set number(arg) {          // 불변성 유지를 위해 세터를 없앰
+  //   this.#number = arg;
+  // }
 
   get toString() {
     return `(${this.#areaCode}) ${this.#number}`;
